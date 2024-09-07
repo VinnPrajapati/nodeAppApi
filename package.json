@@ -1,0 +1,19 @@
+{
+  "name": "nodeappapi",
+  "version": "1.0.0",
+  "description": "this is app api ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VinnPrajapati/nodeAppApi.git"
+  },
+  "author": "vinod",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VinnPrajapati/nodeAppApi/issues"
+  },
+  "homepage": "https://github.com/VinnPrajapati/nodeAppApi#readme"
+}
