@@ -5,10 +5,6 @@ const conn = mysql.createConnection({
   // user: "",
   // password: "",
   // database: "",
-  host: "45.79.125.127",
-  user: "localconnect",
-  password: "india@123",
-  database: "ems",
 });
 
 conn.connect((err) => {
