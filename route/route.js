@@ -1,8 +1,10 @@
 const express = require("express");
-const commonData = require("../controller/commonData.js");
-
+const fileDatas = require("../controller/fileController.js");
+const connomDatas = require("../controller/commonController.js");
 const router = express.Router();
 
-router.post("/upload", commonData.upload, commonData.fileUpload);
+router.post("/upload", fileDatas.upload, fileDatas.fileUpload);
+router.post("/getEduData", connomDatas.getEduData);
+router.post("/getExitMailEmp", connomDatas.exitMailEmpforDues);
 
 module.exports = router;

@@ -1,13 +1,14 @@
 const express = require("express");
 const route = require("./route/route.js");
 const app = express();
+const bodyParser = require("body-parser");
 
 // Middleware to parse JSON and form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files from 'uploads' directory (optional, for testing)
-app.use("/uploads", express.static("uploads"));
+// Use body-parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Use the routes defined
 app.use("/api", route);
