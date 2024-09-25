@@ -1,6 +1,6 @@
 const express = require("express");
 const conn = require("../config/dbConfig.js");
-const { runQuery, runQueryWithParam } = require("./helper.js");
+const { runQuery, runQueryWithParam, uploadFile } = require("./helper.js");
 
 exports.getEduData = async (req, resp) => {
   try {
@@ -18,6 +18,7 @@ exports.getEduData = async (req, resp) => {
     resp.status(400).send({ msg: error, status: false });
   }
 };
+
 
 exports.exitMailEmpforDues = async (req, resp) => {
   try {
@@ -49,11 +50,7 @@ exports.exitMailEmpforDues = async (req, resp) => {
         }
 
         // Array of document types
-        const documentTypes = [
-          "No Dues Form",
-          "FNF Consent",
-          "FNF Settlement Form",
-        ];
+        const documentTypes = ["No Dues Form","FNF Consent","FNF Settlement Form"];
         // Array to hold employee documents
         const employeeDocuments = [];
 
@@ -99,3 +96,46 @@ exports.exitMailEmpforDues = async (req, resp) => {
     }
   } catch (error) {}
 };
+
+
+exports.expenseInsertDatas = async(req, resp) => {
+  try {
+    if (employeeID && fileNameFinal) {
+
+      const data = {
+        EmployeeID: employeeID,
+        date,
+        amount,
+        receipt_no,
+        receipt_image: fileNameFinal,
+        remarks,
+        req_status: 'Pending',
+        reqType,
+        empName,
+        reviewerStatus: 'Pending',
+        approverStatus: 'Pending',
+        base_loc: baselocation,
+        mgrStatus: 'Pending',
+        source: 'App',
+        category,
+        subcategory,
+      };
+
+      const query = `INSERT INTO expense_${reqType.toLowerCase()} (${Object.keys(data).join(',')}) VALUES (${Object.values(data).map(val => `'${val}'`).join(',')})`;
+
+      db.query(query, (err, result) => {
+        if (err) {
+          return res.status(500).json({ msg: "Database insertion failed", status: 0 });
+        }
+        return res.status(200).json({ msg: "Request raised successfully", status: 1 });
+      });
+    } else {
+        return res.status(400).json({ msg: "Invalid request or file not uploaded", status: 0 });
+    }
+
+    
+  } catch (error) {
+    resp.status(400).send({ msg : error, status:false });
+  }
+
+}

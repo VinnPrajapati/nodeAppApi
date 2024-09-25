@@ -1,17 +1,17 @@
 const mysql = require("mysql");
 
 const conn = mysql.createConnection({
-  // host: "",
-  // user: "",
-  // password: "",
-  // database: "",
+  host: "",
+  user: "",
+  password: "",
+  database: "",
 });
 
 conn.connect((err) => {
   if (err) {
-    console.warn("not connected");
+    console.log("not connected");
   } else {
-    console.warn("connected");
+    console.log("connected");
   }
 });
 
